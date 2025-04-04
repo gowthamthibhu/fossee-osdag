@@ -52,8 +52,8 @@ This repository is part of the **Screening Task for Web App Development of Osdag
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/osdag-on-cloud.git
-   cd osdag-on-cloud/backend
+   git clone https://github.com/gowthamthibhu/fossee-osdag.git
+   cd fossee-osdag/backend
    ```
 
 2. Create and activate a virtual environment:
