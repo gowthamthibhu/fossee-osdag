@@ -5,13 +5,12 @@ export async function fetchNavigationData() {
     const response = await axios.get('http://127.0.0.1:8000/api/navigation-items/');
     const data = response.data;
 
-    // Map the data to the required structure
     const sidebarMenuItems = data
       .filter(item => item.category === 'sidebarMenuItems') 
       .map(item => ({
         icon: item.icon,
         text: item.text,
-        selected: false, // Default value
+        selected: false, 
       }));
 
     const topNavTabs = data
@@ -38,7 +37,7 @@ export async function fetchNavigationData() {
         }
         connectionCards[item.parent_id].push({
           title: item.text,
-          image: 'placeholder.png', // Default image
+          image: 'placeholder.png', 
         });
       });
 

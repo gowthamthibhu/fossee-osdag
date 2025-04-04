@@ -7,7 +7,7 @@ import './styles/global.css';
 function App() {
   return (
       <Routes>
-        <Route path="/home" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/BeamToColumnConnection" element={<BeamToColumnConnection />} />
       </Routes>
   );

@@ -178,6 +178,7 @@
   
   .connectionCard h3 {
     padding: 15px;
+    color: white;
     margin: 0;
     text-align: center;
     border-bottom: 1px solid #eee;
@@ -201,6 +202,27 @@
     position: absolute;
     bottom: 10px;
     right: 10px;
+  }
+
+
+  /*welcome message*/
+  .welcomeMessage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    text-align: center;
+  }
+  
+  .welcomeMessage h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .welcomeMessage p {
+    font-size: 1.2rem;
+    color: #666;
   }
   
   /* Radio button styling */
