@@ -22,12 +22,6 @@ body, html {
   height: 100%;
 }
 
-.container{
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  background-color: var(--light-gray);
-}
 
 .connectionDesigner {
   display: flex;
