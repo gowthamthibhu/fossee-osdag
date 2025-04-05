@@ -1,20 +1,22 @@
 /* Container layout */
 .container {
-    display: flex;
-    height: 100vh;
-    width: 210vh;
-    font-family: 'Arial', sans-serif;
-  }
+  display: flex;
+  height: 100vh;
+  width: 100%; /* Use percentage instead of fixed value */
+  font-family: 'Arial', sans-serif;
+}
   
   /* Sidebar styling */
   .sidebar {
-    width: 250px;
+    width: 20%;
+    flex-shrink: 0; 
     background-color: #2c3e50;
     color: white;
     display: flex;
     flex-direction: column;
     padding: 20px 0;
   }
+
   
   .logo {
     padding: 0 20px 20px;
@@ -134,6 +136,8 @@
     background-color: #f5f5f5;
     display: flex;
     flex-direction: column;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+
   }
   
   /* Top navigation */
@@ -167,13 +171,16 @@
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 20px;
     margin-bottom: 30px;
+    width: 100%; /* Ensure full width */
   }
-  
+
   .connectionCard {
     background-color: rgb(49, 49, 49);
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     overflow: hidden;
+    width: 100%; /* Ensure full width within grid cell */
+    box-sizing: border-box; 
   }
   
   .connectionCard h3 {
@@ -279,9 +286,10 @@
   
   /* Start button */
   .startButtonContainer {
+    margin-top: auto;
+    width: 100%;
     display: flex;
     justify-content: center;
-    margin-top: auto;
   }
   
   .startButton {
@@ -306,55 +314,126 @@
   }
   
   /* Dark mode styles */
-  /* Dark mode styles */
-.darkMode {
+  /* Base app container */
+
+
+
+/* And so on for other dark mode styles */
+/* Global styles for dark mode */
+body.darkMode {
+  background-color: #1a1a1a;
   color: #ededed;
-  overflow-y: hidden;
+  margin: 0;
+  padding: 0;
 }
 
-.darkMode .mainContent {
-  overflow: hidden;
+/* Make sure the root div covers the full viewport */
+body.darkMode #root {
+  min-height: 100vh;
+  background-color: #1a1a1a;
+}
+
+/* Container layout for dark mode */
+body.darkMode .container {
+  display: flex;
+  height: 100vh;
   width: 100%;
-  height: 100%;
-  background-color: #1a1a1a; /* Darker background */
+  background-color: #1a1a1a;
 }
 
+/* Main content area in dark mode */
+body.darkMode .mainContent {
+  flex: 1;
+  padding: 20px;
+  background-color: #1a1a1a;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+/* And continue with your other dark mode styles... */
+
+/* Container in dark mode */
+.darkMode .container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+/* Sidebar in dark mode */
 .darkMode .sidebar {
-  background-color: #202938; /* Slightly lighter than default */
+  width: 20%;
+  flex-shrink: 0; 
+  height: 100%;
+  background-color: #1a242d;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
 }
 
 .darkMode .logo {
-  margin-top: 0px;
+  padding: 0 20px 20px;
+  margin-top: 20px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
 
+.darkMode .sidebarMenu {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.darkMode .sidebarButton {
+  padding: 9px 20px;
+  overflow: hidden;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
 .darkMode .sidebarButton:hover {
-  background-color: rgba(255, 255, 255, 0.15);
+  background-color: rgba(250, 22, 22, 0.15);
 }
 
-.darkMode .connectionCard {
-  background-color: #bcbcbc; /* Lighter card background */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  border: 1px solid #3a3a3a;
+.darkMode .sidebarButton.selected {
+  background-color: #3498db;
 }
 
-.darkMode .connectionCard h3 {
-  border-bottom: 1px solid #080808;
-  color: #1a1a1a;
-  padding: 15px 0;
+.darkMode .sidebarFooter {
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  margin-bottom: 20px;
+  padding: 20px;
 }
 
-.darkMode .connectionImage {
-  background-color: #bcbcbc;
+/* Main content area in dark mode */
+.darkMode .mainContent {
+  flex: 1;
+  padding: 20px;
+  height: 100%;
+  background-color: #363636;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
 }
 
+/* Top navigation in dark mode */
 .darkMode .topNav {
-  border-bottom: 1px solid #3a3a3a;
+  display: flex;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #828282;
+  width: 100%;
 }
 
-.darkMode .navButton:not(.active) {
+.darkMode .navButton {
+  padding: 12px 20px;
+  margin-right: 10px;
   color: #e0e0e0;
-  background-color: #2a2a2a;
+  background-color: #828282;
+  cursor: pointer;
+  border-radius: 5px 5px 0 0;
 }
 
 .darkMode .navButton.active {
@@ -363,25 +442,44 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-.darkMode .sidebarButton.selected {
-  background-color: #3498db;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+/* Connection grid in dark mode */
+.darkMode .connectionGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+  width: 100%;
 }
 
-.darkMode .sidebarFooter {
-  border-top: 1px solid rgba(255, 255, 255, 0.15);
+.darkMode .connectionCard {
+  background-color: #5b5b5b;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #3a3a3a;
 }
 
-.darkMode .startButton {
-  background-color: #27ae60;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+.darkMode .connectionCard h3 {
+  padding: 15px;
+  color: white;
+  margin: 0;
+  text-align: center;
+  border-bottom: 1px solid #3a3a3a;
 }
 
-.darkMode .startButton:hover {
-  background-color: #2ecc71;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+.darkMode .connectionImage {
+  position: relative;
+  padding: 15px;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #828282;
 }
 
+/* Radio elements in dark mode */
 .darkMode .checkmark {
   background-color: #444;
 }
@@ -392,6 +490,42 @@
 
 .darkMode .radio input:checked ~ .checkmark {
   background-color: #3498db;
+}
+
+/* Start button in dark mode */
+.darkMode .startButtonContainer {
+  margin-top: auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.darkMode .startButton {
+  background-color: #27ae60;
+  color: white;
+  border: none;
+  padding: 12px 40px;
+  font-size: 16px;
+  border-radius: 30px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.3s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.darkMode .startButton:hover {
+  background-color: #2ecc71;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Welcome message in dark mode */
+.darkMode .welcomeMessage h1 {
+  color: #fff;
+}
+
+.darkMode .welcomeMessage p {
+  color: #aaa;
 }
 
 /* Scrollbar styling for dark mode */

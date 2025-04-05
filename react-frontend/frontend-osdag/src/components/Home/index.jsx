@@ -3,16 +3,23 @@ import { HomeProvider } from './HomeContext';
 import Sidebar from './Sidebar';
 import MainContent from './MainContent';
 import '../../styles/Home.css';
+import { useHome } from './HomeContext';
+
+const HomeContent = () => {
+  const { darkMode } = useHome();
+  
+  return (
+    <div className={`container ${darkMode ? 'darkMode' : ''}`}>
+      <Sidebar />
+      <MainContent />
+    </div>
+  );
+};
 
 const Home = () => {
   return ( 
     <HomeProvider>
-      <div className="container">
-        {/* React doesn't have the Head component, so we're removing it */}
-        {/* You might need to add these in your public/index.html file */}
-        <Sidebar />
-        <MainContent />
-      </div>
+      <HomeContent />
     </HomeProvider>
   );
 };
