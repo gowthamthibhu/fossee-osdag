@@ -7,10 +7,9 @@ const WelcomeMsg = () => {
   
   return (
     <div className={`welcomeMsg ${darkMode ? "darkMode" : ""}`}>
-      <h1>Welcome to OS-DAG</h1>
+      <h1>Welcome to Osdag</h1>
       <p>
-        OS-DAG is a platform for designing and analyzing structural connections.
-        Get started by selecting a connection type from the sidebar.
+        Open steel design and graphics
       </p>
     </div>
   );

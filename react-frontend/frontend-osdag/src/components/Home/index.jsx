@@ -2,16 +2,17 @@ import React from 'react';
 import { HomeProvider } from './HomeContext';
 import Sidebar from './Sidebar';
 import MainContent from './MainContent';
+import WelcomeMsg from './WelcomeMsg';
 import '../../styles/Home.css';
 import { useHome } from './HomeContext';
 
 const HomeContent = () => {
-  const { darkMode } = useHome();
-  
+  const { darkMode, showConnectionPage } = useHome();
+
   return (
     <div className={`container ${darkMode ? 'darkMode' : ''}`}>
       <Sidebar />
-      <MainContent />
+      {showConnectionPage ? <MainContent /> : <WelcomeMsg />}
     </div>
   );
 };

@@ -2,9 +2,9 @@ import React from 'react';
 import { useHome } from './HomeContext';
 import '../../styles/Home.css';
 
-const SidebarButton = ({ icon, text, selected }) => {
+const SidebarButton = ({ icon, text, selected, onClick }) => {
   return (
-    <div className={`sidebarButton ${selected ? 'selected' : ''}`}>
+    <div className={`sidebarButton ${selected ? 'selected' : ''}`} onClick={onClick}>
       <i className={icon}></i>
       <span>{text}</span>
     </div> 
@@ -12,7 +12,37 @@ const SidebarButton = ({ icon, text, selected }) => {
 };
 
 const Sidebar = () => {
-  const { darkMode, toggleDarkMode, sidebarMenuItems } = useHome();
+  const { 
+    darkMode, 
+    toggleDarkMode, 
+    sidebarMenuItems, 
+    setShowConnectionPage, 
+    setSelectedSidebar, 
+    fetchNavigationData // Access fetchNavigationData from useHome
+  } = useHome();
+
+  const handleSidebarClick = (item) => {
+    setSelectedSidebar(item.text);
+    const isConnection = item.id === 'connection-side';
+    setShowConnectionPage(isConnection);
+
+    // Notify backend when "Connection" is clicked
+    if (isConnection) {
+      fetch('http://127.0.0.1:8000/api/connection-selected/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ page: 'connection' }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log("Backend response:", data);
+          if (data.message === "Connection page acknowledged by backend.") {
+            fetchNavigationData(); // Fetch updated data from the backend
+          }
+        })
+        .catch((error) => console.error("Error notifying backend:", error));
+    }
+  };
 
   return (
     <div className="sidebar">
@@ -27,6 +57,7 @@ const Sidebar = () => {
             icon={item.icon}
             text={item.text}
             selected={item.selected}
+            onClick={() => handleSidebarClick(item)}
           />
         ))}
       </div>

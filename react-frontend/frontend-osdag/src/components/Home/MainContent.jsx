@@ -8,6 +8,7 @@ import '../../styles/Home.css';
 
 const MainContent = () => {
   const { darkMode, activeTab, secondaryTab } = useHome(); 
+  
 
   return (
     <div className={`mainContent ${darkMode ? 'darkMode' : ''}`}>

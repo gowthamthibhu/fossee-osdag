@@ -19,6 +19,9 @@ export function HomeProvider({ children }) {
   const [activeTab, setActiveTab] = useState('shear-connection');
   const [secondaryTab, setSecondaryTab] = useState('beam-to-beam');
   const [loading, setLoading] = useState(false);
+  const [selectedSidebar, setSelectedSidebar] = useState(null);
+  const [showConnectionPage, setShowConnectionPage] = useState(false);
+
 
   // Navigation data state
   const [navigationData, setNavigationData] = useState({
@@ -32,20 +35,20 @@ export function HomeProvider({ children }) {
   const fetchNavigationData = async () => {
     try {
       setLoading(true);
-      console.log("Fetching data from:", API_URL); 
+      console.log("Fetching data from:", API_URL);
       const response = await axios.get(API_URL);
       const data = response.data;
-      console.log("Fetched data:", data); // Debugging line
-
-      // Map the data to the required structure
+      console.log("Fetched data:", data);
+  
       const sidebarMenuItems = data
         .filter(item => item.category === 'sidebarMenuItems')
         .map(item => ({
+          id: item.id,
           icon: item.icon,
           text: item.text,
-          selected: false, // Default value
+          selected: item.id === 'connection-side', // Mark "connection-side" as selected
         }));
-
+  
       const topNavTabs = data
         .filter(item => item.category === 'topNavTabs')
         .map(item => ({
@@ -53,14 +56,14 @@ export function HomeProvider({ children }) {
           icon: item.icon,
           text: item.text,
         }));
-
+  
       const momentConnectionTabs = data
         .filter(item => item.category === 'momentConnectionTabs')
         .map(item => ({
           id: item.id,
           text: item.text,
         }));
-
+  
       const connectionCards = {};
       data
         .filter(item => item.category === 'connectionCards')
@@ -70,10 +73,10 @@ export function HomeProvider({ children }) {
           }
           connectionCards[item.parent_id].push({
             title: item.text,
-            image: item.image || 'placeholder.png', // Use the actual image URL if available
+            image: item.image || 'placeholder.png',
           });
         });
-
+  
       setNavigationData({ sidebarMenuItems, topNavTabs, momentConnectionTabs, connectionCards });
       setLoading(false);
     } catch (error) {
@@ -108,6 +111,11 @@ export function HomeProvider({ children }) {
     secondaryTab,
     setSecondaryTab,
     loading,
+
+    selectedSidebar,
+    setSelectedSidebar,
+    showConnectionPage,
+    setShowConnectionPage,
 
     // Data
     navigationData,

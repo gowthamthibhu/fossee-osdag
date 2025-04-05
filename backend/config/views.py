@@ -9,7 +9,7 @@ class NavigationItemsView(APIView):
         items = NavigationItem.objects.all()
         serializer = NavigationItemSerializer(items, many=True, context={'request': request})
         return Response(serializer.data)
-    
+
 class ConnectionSelectionView(APIView):
     def post(self, request, *args, **kwargs):
         # Extract connection details from the request
@@ -23,8 +23,6 @@ class ConnectionSelectionView(APIView):
                 status=status.HTTP_400_BAD_REQUEST
             )
 
-        # Simulate processing the connection selection
-        # In a real application perform database queries or calculations here
         response_data = {
             "message": "Connection selected successfully.",
             "connection_type": connection_type,
@@ -33,3 +31,14 @@ class ConnectionSelectionView(APIView):
         }
 
         return Response(response_data, status=status.HTTP_200_OK)
+
+# ✅ NEW VIEW: when "Connection" button is clicked on sidebar
+class ConnectionPageSelectedView(APIView):
+    def post(self, request, *args, **kwargs):
+        page = request.data.get("page")
+
+        if page == "connection":
+            print("📡 Backend: 'Connection' page selected by frontend.")
+            return Response({"message": "Connection page acknowledged by backend."}, status=status.HTTP_200_OK)
+
+        return Response({"error": "Invalid page."}, status=status.HTTP_400_BAD_REQUEST)
