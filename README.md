@@ -74,7 +74,20 @@ This repository is part of the **Screening Task for Web App Development of Osdag
    python manage.py migrate
    ```
 
-6. Start the backend server:
+6. Django Admin:
+ ```bash
+python manage.py createsuperuser
+```
+   - Username: Choose a username for the superuser.
+
+   - Email Address: Provide an email address (optional, can be left blank).
+
+   - Password: Enter a secure password and confirm it when prompted.
+
+   - Open your web browser and navigate to the Django admin login page:
+
+
+7. Start the backend server:
    ```bash
    python manage.py runserver
    ```
