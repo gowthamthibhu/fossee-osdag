@@ -78,15 +78,15 @@ This repository is part of the **Screening Task for Web App Development of Osdag
  ```bash
 python manage.py createsuperuser
 ```
-Username: Choose a username for the superuser.
+   - Username: Choose a username for the superuser.
 
-Email Address: Provide an email address (optional, can be left blank).
+   - Email Address: Provide an email address (optional, can be left blank).
 
-Password: Enter a secure password and confirm it when prompted.
+   - Password: Enter a secure password and confirm it when prompted.
 
-Open your web browser and navigate to the Django admin login page:
+   - Open your web browser and navigate to the Django admin login page:
 
-http://127.0.0.1:8000/admin/
+   http://127.0.0.1:8000/admin/
 
 7. Start the backend server:
    ```bash
