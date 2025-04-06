@@ -86,7 +86,6 @@ python manage.py createsuperuser
 
    - Open your web browser and navigate to the Django admin login page:
 
-   http://127.0.0.1:8000/admin/
 
 7. Start the backend server:
    ```bash
